@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
+require('dotenv').config();
 const db = require('./db');       
-const Person = require('./models/Person');
+const Person = require('./models/person');
 const bodyParser = require('body-parser');
 const Menu=require('./models/Menu');
 
+
 app.use(bodyParser.json());
+const PORT=process.env.PORT || 3000
 
 app.get('/', (req, res) => {
   res.send('Hello World');
@@ -127,6 +130,7 @@ app.delete('/person/:id',async(req,res)=>{
       res.status(500).json({error:'Internal Server Error'});
   }
 })
-app.listen(3000, () => {
+
+app.listen(PORT, () => {
   console.log('Server is running on http://localhost:3000');
 });
